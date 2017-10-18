@@ -1,64 +1,42 @@
 package ch.dawei.popularmovies;
 
+
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 /**
  * Created by david on 10/17/2017.
  */
 
-public class ImageAdapter extends BaseAdapter {
-    private Context mContext;
+public class ImageAdapter extends ArrayAdapter<Movie> {
 
-    public ImageAdapter(Context c) {
-        mContext = c;
+    public ImageAdapter(Context context,List<Movie> objects) {
+        super(context,0, objects);
     }
 
-    public int getCount() {
-        return mThumbIds.length;
-    }
-
-    public Object getItem(int position) {
-        return null;
-    }
-
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    // create a new ImageView for each item referenced by the Adapter
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        // Gets the AndroidFlavor object from the ArrayAdapter at the appropriate position
+        Movie movie = getItem(position);
+
+        // Adapters recycle views to AdapterViews.
+        // If this is a new View object we're getting, then inflate the layout.
+        // If not, this view already has the layout inflated from a previous call to getView,
+        // and we modify the View widgets as usual.
         if (convertView == null) {
-            // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageView.setAdjustViewBounds(true);
-
-        } else {
-            imageView = (ImageView) convertView;
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_main,parent);
         }
+        ImageView imageView = convertView.findViewById(R.id.imageView);
+        Picasso.with(this.getContext()).load(movie.getMoviePoster()).into(imageView);
 
-        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w342//"+mThumbIds[position]+".jpg").into(imageView);
-        return imageView;
+        return convertView;
     }
-    //dada
-
-    // references to our images
-    private String[] mThumbIds = {
-            "nBNZadXqJSdt05SHLqgT0HuC5Gm",
-            "uC6TTUhPpQCmgldGyYveKRAu8JN",
-            "q0R4crx2SehcEEQEkYObktdeFy",
-            "kY2c7wKgOfQjvbqe7yVzLTYkxJO",
-            "pKESfn2Pdy0b7drvZHQb7UzgqoY",
-            "9gLu47Zw5ertuFTZaxXOvNfy78T",
-            "imekS7f1OuHyUP2LAiTEM0zBzUz",
-            "kmcqlZGaSh20zpTbuoF0Cdn07dT",
-            "dM2w364MScsjFf8pfMbaWUcWrR"
-    };
 }
