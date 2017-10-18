@@ -4,8 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by david on 10/17/2017.
@@ -36,19 +37,27 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setAdjustViewBounds(true);
+
         } else {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w342//"+mThumbIds[position]+".jpg").into(imageView);
         return imageView;
     }
 
     // references to our images
-    private Integer[] mThumbIds = {
-
+    private String[] mThumbIds = {
+            "nBNZadXqJSdt05SHLqgT0HuC5Gm",
+            "uC6TTUhPpQCmgldGyYveKRAu8JN",
+            "q0R4crx2SehcEEQEkYObktdeFy",
+            "kY2c7wKgOfQjvbqe7yVzLTYkxJO",
+            "pKESfn2Pdy0b7drvZHQb7UzgqoY",
+            "9gLu47Zw5ertuFTZaxXOvNfy78T",
+            "imekS7f1OuHyUP2LAiTEM0zBzUz",
+            "kmcqlZGaSh20zpTbuoF0Cdn07dT",
+            "dM2w364MScsjFf8pfMbaWUcWrR"
     };
 }
