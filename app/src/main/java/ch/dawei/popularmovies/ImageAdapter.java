@@ -47,6 +47,7 @@ public class ImageAdapter extends BaseAdapter {
         Picasso.with(mContext).load("http://image.tmdb.org/t/p/w342//"+mThumbIds[position]+".jpg").into(imageView);
         return imageView;
     }
+    //dada
 
     // references to our images
     private String[] mThumbIds = {
