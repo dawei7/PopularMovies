@@ -24,7 +24,6 @@ public class ImageAdapter extends ArrayAdapter<Movie> {
         super(context,0, objects);
 
         this.context = context;
-
         inflater = LayoutInflater.from(context);
 
     }
@@ -32,17 +31,13 @@ public class ImageAdapter extends ArrayAdapter<Movie> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Gets the AndroidFlavor object from the ArrayAdapter at the appropriate position
+
         Movie movie = getItem(position);
 
-        // Adapters recycle views to AdapterViews.
-        // If this is a new View object we're getting, then inflate the layout.
-        // If not, this view already has the layout inflated from a previous call to getView,
-        // and we modify the View widgets as usual.
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.image_view,parent,false);
         }
-        //Picasso.with(this.getContext()).load(movie.getMoviePoster()).into(imageView);
+
         Picasso
                 .with(context)
                 .load(movie.getMoviePoster())
