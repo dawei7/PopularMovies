@@ -29,13 +29,13 @@ import java.util.Scanner;
  */
 public class NetworkUtils {
 
-    final static String GITHUB_BASE_URL = "http://api.themoviedb.org/3/movie/";
+    private final static String BASE_URL = "http://api.themoviedb.org/3/movie/";
 
-    //Please insert your own key
-    final static String API_KEY = "3c2f9be53000d40d4f2a54992e159d54";
+
+    //private final static String API_KEY =  "INSERT YOUR API_KEY HERE";
 
     public static URL buildUrl(String sortBy) {
-        Uri builtUri = Uri.parse(GITHUB_BASE_URL).buildUpon()
+        Uri builtUri = Uri.parse(BASE_URL).buildUpon()
                 .appendPath(sortBy)
                 .appendQueryParameter("api_key", API_KEY)
                 .build();

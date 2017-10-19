@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,12 +23,8 @@ import ch.dawei.popularmovies.utilities.NetworkUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    //API KEY https://api.themoviedb.org/3/movie/550?api_key=3c2f9be53000d40d4f2a54992e159d54
-    //https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
 
-    //Fields
     GridView gridView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +61,12 @@ public class MainActivity extends AppCompatActivity {
         new MainActivity.TheMovieDBQueryTask().execute(theMovieDBSearchUrl);
     }
 
-    public class TheMovieDBQueryTask extends AsyncTask<URL, Void, String> {
-
-        private ProgressBar mLoadingIndicator;
-
+    private class TheMovieDBQueryTask extends AsyncTask<URL, Void, String> {
 
         // COMPLETED (26) Override onPreExecute to set the loading indicator to visible
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //mLoadingIndicator.setVisibility(View.VISIBLE);
         }
 
         @Override

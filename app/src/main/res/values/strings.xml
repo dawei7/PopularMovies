@@ -3,9 +3,7 @@
     <string name="orderByPopularity">Order by Popularity</string>
     <string name="orderByTopRated">Order by Top Rated</string>
 
-    <string name="title"><b>Title: </b></string>
-    <string name="releaseDate"><b>Release Date: </b></string>
-    <string name="voteAverage"><b>Average Vote: </b></string>
-    <string name="overview"><b>Overview: </b>/n</string>
+    <string name="moviePoster">Movie Poster</string>
+    <string name="GoBack">Go Back </string>
 
 </resources>
