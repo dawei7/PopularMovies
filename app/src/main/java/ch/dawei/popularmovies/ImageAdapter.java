@@ -17,10 +17,18 @@ import java.util.List;
  */
 
 public class ImageAdapter extends ArrayAdapter<Movie> {
+    private Context context;
+    private LayoutInflater inflater;
 
     public ImageAdapter(Context context,List<Movie> objects) {
         super(context,0, objects);
+
+        this.context = context;
+
+        inflater = LayoutInflater.from(context);
+
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -32,10 +40,13 @@ public class ImageAdapter extends ArrayAdapter<Movie> {
         // If not, this view already has the layout inflated from a previous call to getView,
         // and we modify the View widgets as usual.
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_main,parent);
+            convertView = inflater.inflate(R.layout.image_view,parent,false);
         }
-        ImageView imageView = convertView.findViewById(R.id.imageView);
-        Picasso.with(this.getContext()).load(movie.getMoviePoster()).into(imageView);
+        //Picasso.with(this.getContext()).load(movie.getMoviePoster()).into(imageView);
+        Picasso
+                .with(context)
+                .load(movie.getMoviePoster())
+                .into((ImageView) convertView);
 
         return convertView;
     }

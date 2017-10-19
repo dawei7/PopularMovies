@@ -23,8 +23,8 @@ public class TheMovieDBQueryTask extends AsyncTask<URL, Void, String> {
     private AsyncResponse listener;
     private ProgressBar mLoadingIndicator;
 
-    public TheMovieDBQueryTask(AsyncResponse listener){
-        this.listener=listener;
+    public TheMovieDBQueryTask(AsyncResponse listener) {
+        this.listener = listener;
     }
 
     // COMPLETED (26) Override onPreExecute to set the loading indicator to visible
@@ -60,8 +60,8 @@ public class TheMovieDBQueryTask extends AsyncTask<URL, Void, String> {
         try {
             JSONObject movieDB = new JSONObject(movieDBSearchResults);
             JSONArray results = movieDB.getJSONArray("results");
-            for(int i=0;i<results.length();i++){
-                moviePoster = results.getJSONObject(i).getString("poster_path");
+            for (int i = 0; i < results.length(); i++) {
+                moviePoster = "http:/image.tmdb.org/t/p/w342/" + results.getJSONObject(i).getString("poster_path") + ".jpg";
                 title = results.getJSONObject(i).getString("title");
                 releasedDate = results.getJSONObject(i).getString("release_date");
                 voteAverage = results.getJSONObject(i).getDouble("vote_average");
