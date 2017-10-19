@@ -1,8 +1,14 @@
 package ch.dawei.popularmovies;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 
@@ -23,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Fields
     GridView gridView;
-    ArrayList<Movie> mMovies;
 
 
     @Override
@@ -31,9 +36,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gridView = (GridView) findViewById(R.id.gridView);
-        makeTheMovieDBSearchQuery("popular");
-
+        makeTheMovieDBSearchQuery("popular"); //Preselected Choice
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.optionPopularity:
+                makeTheMovieDBSearchQuery("popular");
+                break;
+
+            case R.id.optionTopRated:
+                makeTheMovieDBSearchQuery("top_rated");
+                break;
+        }
+        return true;
+    }
+
 
     private void makeTheMovieDBSearchQuery(String sortby) {
         URL theMovieDBSearchUrl = NetworkUtils.buildUrl(sortby);
@@ -67,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String movieDBSearchResults) {
+            super.onPostExecute(movieDBSearchResults);
 
-            ArrayList<Movie> movies = new ArrayList<>();
+            final ArrayList<Movie> movies = new ArrayList<>();
             String moviePoster;
             String title;
             String releasedDate;
@@ -92,13 +119,18 @@ public class MainActivity extends AppCompatActivity {
             //mLoadingIndicator.setVisibility(View.INVISIBLE);
             gridView.setAdapter(new ImageAdapter(getBaseContext(), movies));
 
-            /*gridView.setOnItemClickListener(new OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View v,
-                                        int position, long id) {
-                    Toast.makeText(MainActivity.this, "" + position,
-                            Toast.LENGTH_SHORT).show();
+            gridView.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    Intent i = new Intent(MainActivity.this, DetailActivity.class);
+                    i.putExtra("MOVIE_POSTER",movies.get(position).getMoviePoster());
+                    i.putExtra("TITLE",movies.get(position).getTitle());
+                    i.putExtra("RELEASE",movies.get(position).getReleasedDate());
+                    i.putExtra("VOTE_AVERAGE",Double.toString(movies.get(position).getVoteAverage()));
+                    i.putExtra("OVERVIEW",movies.get(position).getPlotSynopsis());
+                    startActivity(i);
                 }
-            });*/
+            });
         }
     }
 }
