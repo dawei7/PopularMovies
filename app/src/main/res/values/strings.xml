@@ -6,4 +6,10 @@
     <string name="moviePoster">Movie Poster</string>
     <string name="GoBack">Go Back </string>
 
+    <string name="errorMessage">An error occured: "No internet connection".
+        The app requires an internet connection,
+        to enable querying movies data from the internet.
+        After connecting to the internet, please restart the app.
+    </string>
+
 </resources>

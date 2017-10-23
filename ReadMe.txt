@@ -1,6 +1,7 @@
 Dear reviewer
 
-Please insert in File NetworkUtils.java Line 35 your API-Code for the movie db.
+Please provide your own API key and save it in your gradle.properties file as
+MyMovieDbApiKey="YOUR API KEY"
 
 Thanks a lot and have fun.
 

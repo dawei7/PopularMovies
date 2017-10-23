@@ -16,6 +16,7 @@
 package ch.dawei.popularmovies.utilities;
 
 import android.net.Uri;
+import android.support.compat.BuildConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,13 +32,13 @@ public class NetworkUtils {
 
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/";
 
+    private final static String MY_MOVIE_DB_API_KEY = ch.dawei.popularmovies.BuildConfig.MY_MOVIE_DB_API_KEY;
 
-    //private final static String API_KEY =  "INSERT YOUR API_KEY HERE";
 
     public static URL buildUrl(String sortBy) {
         Uri builtUri = Uri.parse(BASE_URL).buildUpon()
                 .appendPath(sortBy)
-                .appendQueryParameter("api_key", API_KEY)
+                .appendQueryParameter("api_key", MY_MOVIE_DB_API_KEY)
                 .build();
 
         URL url = null;
